@@ -6,4 +6,4 @@
 1. **04_rename_with_slice.py**: rename group of files, within a single directory, using slice
 1. **05_load_json_without_dupes.py**: load json, convert to dict, raise error if there is a duplicate key
 1. **06_execution_time.py**: class used for timing execution of code
-1.**07_benchmark_permissions_loading_django.py**: benchmark loading of permissions in Django
+1. **07_benchmark_permissions_loading_django.py**: benchmark loading of permissions in Django
