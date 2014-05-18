@@ -3,7 +3,6 @@ import re
 import urlparse
 
 # regex
-email_re = re.compile(r'([\w\.,]+@[\w\.,]+\.\w+)')
 link_re = re.compile(r'href="(.*?)"')
 
 
@@ -25,9 +24,8 @@ def crawl(url, maxlevel):
         for link in links:
             # Get an absolute URL for a link
             link = urlparse.urljoin(url, link)
-
-            # Find all emails on current page
-            result.update(email_re.findall(req.text))
+            # add links to result set
+            result.update(link)
 
             print "Crawled level: {}".format(maxlevel)
 
@@ -41,6 +39,6 @@ def crawl(url, maxlevel):
 
 emails = crawl('http://www.website_goes_here_dot_com', 2)
 
-print "\nScrapped e-mail addresses:"
-for email in emails:
-    print email
+print "\nScrapped links:"
+for link in links:
+    print link
