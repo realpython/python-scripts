@@ -26,7 +26,8 @@ def crawl(url):
         link = urlparse.urljoin(url, link)
 
         print link
-
+        
 
 if __name__ == '__main__':
     crawl('http://www.realpython.com')
+
