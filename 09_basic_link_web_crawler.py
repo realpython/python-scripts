@@ -6,39 +6,27 @@ import urlparse
 link_re = re.compile(r'href="(.*?)"')
 
 
-def crawl(url, maxlevel):
+def crawl(url):
 
-    result = set()
+    req = requests.get(url)
 
-    while maxlevel > 0:
+    # Check if successful
+    if(req.status_code != 200):
+        return []
 
-        # Get the webpage
-        req = requests.get(url)
+    # Find links
+    links = link_re.findall(req.text)
 
-        # Check if successful
-        if(req.status_code != 200):
-            return []
+    print "\nFound {} links".format(len(links))
 
-        # Find and follow all the links
-        links = link_re.findall(req.text)
-        for link in links:
-            # Get an absolute URL for a link
-            link = urlparse.urljoin(url, link)
-            # add links to result set
-            result.update(link)
+    # Search links for emails
+    for link in links:
 
-            print "Crawled level: {}".format(maxlevel)
+        # Get an absolute URL for a link
+        link = urlparse.urljoin(url, link)
 
-            # new level
-            maxlevel -= 1
+        print link
 
-            # recurse
-            crawl(link, maxlevel)
 
-    return result
-
-emails = crawl('http://www.website_goes_here_dot_com', 2)
-
-print "\nScrapped links:"
-for link in links:
-    print link
+if __name__ == '__main__':
+    crawl('http://www.realpython.com')

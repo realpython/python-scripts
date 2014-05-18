@@ -7,40 +7,36 @@ email_re = re.compile(r'([\w\.,]+@[\w\.,]+\.\w+)')
 link_re = re.compile(r'href="(.*?)"')
 
 
-def crawl(url, maxlevel):
+def crawl(url):
 
     result = set()
 
-    while maxlevel > 0:
+    req = requests.get(url)
 
-        # Get the webpage
-        req = requests.get(url)
+    # Check if successful
+    if(req.status_code != 200):
+        return []
 
-        # Check if successful
-        if(req.status_code != 200):
-            return []
+    # Find links
+    links = link_re.findall(req.text)
 
-        # Find and follow all the links
-        links = link_re.findall(req.text)
-        for link in links:
-            # Get an absolute URL for a link
-            link = urlparse.urljoin(url, link)
+    print "\nFound {} links".format(len(links))
 
-            # Find all emails on current page
-            result.update(email_re.findall(req.text))
+    # Search links for emails
+    for link in links:
 
-            print "Crawled level: {}".format(maxlevel)
+        # Get an absolute URL for a link
+        link = urlparse.urljoin(url, link)
 
-            # new level
-            maxlevel -= 1
-
-            # recurse
-            crawl(link, maxlevel)
+        # Find all emails on current page
+        result.update(email_re.findall(req.text))
 
     return result
 
-emails = crawl('http://www.website_goes_here_dot_com', 2)
+if __name__ == '__main__':
+    emails = crawl('http://www.realpython.com')
 
-print "\nScrapped e-mail addresses:"
-for email in emails:
-    print email
+    print "\nScrapped e-mail addresses:"
+    for email in emails:
+        print email
+    print "\n"
