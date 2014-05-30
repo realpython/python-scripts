@@ -1,167 +1,131 @@
-### WIP
-
 import sys
 import os
-import getopt
 import csv
+import argparse
 
 """
-    Splits a CSV file into multiple pieces based on command line arguments.
+
+Splits a CSV file into multiple pieces based on command line arguments.
 
     Arguments:
-        `-h`: help file of usage of the script  
-        `-i`: input file name 
-        `-o`: output file, A %s-style template for the numbered output files.
-        `-r`: row limit to split 
-        `-c`: A %s-style template for the numbered output files.
+
+    `-h`: help file of usage of the script
+    `-i`: input file name
+    `-o`: output file name
+    `-r`: row limit to split
 
     Default settings:
-        `output_path` is the current directory
-        `keep_headers` is on (headers will be kept)
-        `delimeter` is ,
+
+    `output_path` is the current directory
+    headers are displayed on each split file
+    the default delimeter is a comma
 
     Example usage:
-        # split by every 10000 rows
-        >> python 12_csv_split.py -i input.csv -o rownumber -r 10000   
-        # split by unique items in column 0 
-        >> python 12_csv_split.py -i input.csv -o userid -c 0   
-        # access help
-        >> python 12_csv_split.py -h for help 
-    
+
+    ```
+    # split csv by every 100 rows
+    >> python csv_split.py -i input.csv -o output -r 100
+    ```
+
 """
 
-def main(argv):
 
-    argument_dict = grab_command_line_arguments(argv)
-    parse_file(argument_dict)
+def get_arguments():
+    """Grab user supplied arguments using the argparse library."""
 
+    # Use arparse to get command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input_file", required=True,
+                        help="csv input file (with extension)", type=str)
+    parser.add_argument("-o", "--output_file", required=True,
+                        help="csv output file (without extension)", type=str)
+    parser.add_argument("-r", "--row_limit", required=True,
+                        help="row limit to split csv at", type=int)
+    args = parser.parse_args()
 
-def grab_command_line_arguments(argv):
+    # Check if the input_file exits
+    is_valid_file(parser, args.input_file)
 
-    # global variables
-    inputfile = ''
-    outputfile = ''
-    rowlimit = ''
-    columnindex = ''  
-    argument_dict = {} 
+    # Check if the input_file is valid
+    is_valid_csv(parser, args.input_file, args.row_limit)
 
-    # grab arguments
-    opts, args = getopt.getopt(argv,"hi:o:r:c:",["ifile=","ofile=","rowlimit=","columnindex="])
-
-    # end if no arguments provided
-    if not opts:
-        print "No options provided. Try again. Use `-h` for help."
-        sys.exit()
-
-    # grab arguments
-    for opt, arg in opts:
-        if opt == '-h':
-            print 'csvsplit.py -i <inputfile> -r <row limit> -c <column index> -o <outputfile>'
-            sys.exit()
-        elif opt in ("-i", "--ifile"):
-            inputfile = arg
-        elif opt in ("-o", "--ofile"):
-            outputfile = arg
-        elif opt in ("-r", "--rowlimit"):
-            rowlimit = arg
-        elif opt in ("-c", "--columnindex"):
-            columnindex = arg
-
-    # Output arguments
-    print "\nArguments:"
-    if inputfile:
-        argument_dict["input_file"] = inputfile
-        print "Input file is '{}'".format(inputfile)
-    else:
-        "Please enter an input file."
-    if outputfile:
-        argument_dict["output_file"] = outputfile
-        print "Output file is '{}'".format(outputfile)
-    else:
-        print "Please enter an output file."
-    if rowlimit:
-        argument_dict["rowlimit"] = rowlimit
-        print "Rowlimit is '{}'".format(rowlimit)
-    if columnindex:
-        argument_dict["columnindex"] = columnindex
-        print "Columnindex is '{}'".format(columnindex) 
-    if rowlimit and columnindex:
-        print "Please use either a rowlimit or columnlimit, not both."
-        sys.exit()
-    if not rowlimit or columnindex:
-        print "Please enter either a rowlimit or columnlimit."
-        sys.exit()
-
-    # to do - check to make sure file, rowlimit, and columnlimit exist
-    print argument_dict
-    return argument_dict
+    return args.input_file, args.output_file, args.row_limit
 
 
-def parse_file(argument_dict):
+def is_valid_file(parser, file_name):
+    """Ensure that the input_file exists."""
+    if not os.path.exists(file_name):
+        parser.error("The file '{}' does not exist!".format(file_name))
+        sys.exit(1)
 
-    #split csv file by certain rownumber 
-    if argument_dict["rowlimit"]:           
-        rowlimit = int(argument_dict["rowlimit"])
-        output_name_file = "{}.csv".format(argument_dict["output_file"])
-        output_path='.'
-        keep_headers=True
-        delimiter=','
-        filehandler = open(argument_dict["input_file"],'r')
-        reader = csv.reader(filehandler, delimiter=delimiter)
-        current_piece = 1
-        current_out_path = os.path.join(
-            output_path,
-            output_name_file
+
+def is_valid_csv(parser, file_name, row_limit):
+    """
+    Ensure that the # of rows in the input_file
+    is greater than the row_limit.
+    """
+    row_count = 0
+    for row in csv.reader(open(file_name)):
+        row_count += 1
+    # Note: You could also use a generator expression
+    # and the sum() function to count the rows:
+    # row_count = sum(1 for row in csv.reader(open(file_name)))
+    if row_limit > row_count:
+        parser.error(
+            "The 'row_count' of '{}' is > the number of rows in '{}'!"
+            .format(row_limit, file_name)
         )
-        current_out_writer = csv.writer(open(current_out_path, 'w'), delimiter=delimiter)
-        current_limit = rowlimit
-        if keep_headers:
-            headers = reader.next()
-            current_out_writer.writerow(headers)
-        for i, row in enumerate(reader):
-            if i + 1 > current_limit:
-                current_piece += 1
-                current_limit = rowlimit * current_piece
-                current_out_path = os.path.join(
-                    output_path,
-                    output_name_file
-                )
-            current_out_writer = csv.writer(open(current_out_path, 'w'), delimiter=delimiter)
+        sys.exit(1)
 
-# elif columnindex:               #split csv file accrording to unique values of certain column,it's like filter only certain item in excel 
-# itemlist = []
-# columnindex = int(columnindex)
-# output_name_template= outputfile+'_%s.csv'
-# output_path='.'
-# keep_headers=True
-# delimiter=','
-# filehandler = open(inputfile,'r')
-# reader = csv.reader(filehandler, delimiter=delimiter)
-# if keep_headers:
-#   headers = reader.next()
 
-# for i, row in enumerate(reader):
+def parse_file(arguments):
+    """
+    Splits the CSV into multiple files or chunks based on the row_limit.
+    Then create new CSV files.
+    """
+    input_file = arguments[0]
+    output_file = arguments[1]
+    row_limit = arguments[2]
+    output_path = '.'  # Current directory
 
-#   current_out_path = os.path.join(
-#        output_path,
-#        output_name_template  % row[columnindex] )
-#   if row[columnindex] not in itemlist:
-#      try:
-#          current_out_writer = csv.writer(open(current_out_path, 'w'), delimiter=delimiter)
-#      except IOError:
-#          continue
-#      else:
-#          itemlist.append(row[columnindex])
-#          if keep_headers:
-#              current_out_writer.writerow(headers)
-#          current_out_writer.writerow(row)
-#   else:
-#      current_out_writer = csv.writer(open(current_out_path, 'a'), delimiter=delimiter)
-#      current_out_writer.writerow(row)
-# print 'totally %i unique items in column %i \n' % (len(itemlist),columnindex)
-# else:
-# print "oops, please check instruction of script by >>./csvsplit.py -h"
+    # Read CSV, split into list of lists
+    with open(input_file, 'r') as input_csv:
+        datareader = csv.reader(input_csv)
+        all_rows = []
+        for row in datareader:
+            all_rows.append(row)
+
+        # Remove header
+        header = all_rows.pop(0)
+
+        # Split list of list into chunks
+        current_chunk = 0
+        for i in range(0, len(all_rows), row_limit):  # Loop through list
+            chunk = all_rows[i:i + row_limit]  # Create single chunk
+
+            current_output = os.path.join(  # Create new output file
+                output_path,
+                "{}-{}.csv".format(output_file, current_chunk)
+            )
+
+            # Add header
+            chunk.insert(0, header)
+
+            # Write chunk to output file
+            with open(current_output, 'w') as output_csv:
+                writer = csv.writer(output_csv)
+                writer = writer.writerows(chunk)
+
+            # Output info
+            print ""
+            print "Chunk # {}:".format(current_chunk)
+            print "Filepath: {}".format(current_output)
+            print "# of rows: {}".format(len(chunk))
+
+            # Create new chunk
+            current_chunk += 1
 
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    arguments = get_arguments()
+    parse_file(arguments)
