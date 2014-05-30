@@ -5,7 +5,7 @@ import argparse
 
 """
 
-Splits a CSV file into multiple pieces based on command line arguments.
+Splits a CSV file into multiple files based on command line arguments.
 
     Arguments:
 
@@ -99,7 +99,7 @@ def parse_file(arguments):
         header = all_rows.pop(0)
 
         # Split list of list into chunks
-        current_chunk = 0
+        current_chunk = 1
         for i in range(0, len(all_rows), row_limit):  # Loop through list
             chunk = all_rows[i:i + row_limit]  # Create single chunk
 

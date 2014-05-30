@@ -11,3 +11,4 @@
 1. **09_basic_link_web_crawler.py**: web crawler for grabbing links from a website 
 1. **10_find_files_recursively.py**: recursively grab files from a directory
 1. **11_optimize_images_with_wand.py**: recursively grab images from a directory, then optimize them for the web
+1. **12_csv_split.py**: Splits a CSV file into multiple files based on command line arguments.
