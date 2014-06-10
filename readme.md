@@ -13,3 +13,4 @@
 1. **11_optimize_images_with_wand.py**: recursively grab images from a directory, then optimize them for the web
 1. **12_csv_split.py**: Splits a CSV file into multiple files based on command line arguments.
 1. **13_random_name_generator.py**: random name generator
+1. ***14_html_to_markdown.sh**: Convert all html files in a single directory to markdown
