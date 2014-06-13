@@ -42,4 +42,4 @@ if CONFIGFILE is None:
 print "Config file: {}".format(CONFIGFILE)
 if not os.path.exists(CONFIGFILE):
     sys.exit("Configuration error! Config file does not exist")
-print "Congig ok ...."
+print "Config ok ...."
