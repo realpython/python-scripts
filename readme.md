@@ -16,3 +16,4 @@
 1. **14_html_to_markdown.sh**: Convert all html files in a single directory to markdown
 1. **15_check_my_environment.py**: Pass in a config file based on your environment.
 1. **16_jinja_quick_load.py**: Render a quick Jinja2 template
+1. **17_rewrite_git_history.md**: Backdating/Rewriting Git history (use at your own risk)
