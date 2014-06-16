@@ -9,3 +9,5 @@ $ export GIT_AUTHOR_DATE="Sun Jun 15 14:00 2014 +0100"
 $ git commit -m "so bad"
 $ git push
 ```
+
+> `GIT_COMMITER_DATE` and `GIT_AUTHOR_DATE` are environment variables
