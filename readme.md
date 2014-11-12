@@ -18,3 +18,5 @@
 1. **16_jinja_quick_load.py**: Render a quick Jinja2 template
 1. **17_rewrite_git_history.md**: Backdating/Rewriting Git history (use at your own risk)
 1. **18_zipper.py**: Zip contents of a directory, adding a timestamp to the filename
+1. **19_tsv-to-csv.py**: Convert TSV to CSV
+1. **20_restore_file_from_git.py**: Restore file from Git History
