@@ -20,3 +20,5 @@
 1. **18_zipper.py**: Zip contents of a directory, adding a timestamp to the filename
 1. **19_tsv-to-csv.py**: Convert TSV to CSV
 1. **20_restore_file_from_git.py**: Restore file from Git History
+1. **21_twitter_bot.py**: Twitter Bot
+1. **22_git_tag.py**: Create Git Tag based on a commit
