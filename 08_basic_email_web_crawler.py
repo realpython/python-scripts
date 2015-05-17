@@ -1,6 +1,9 @@
 import requests
 import re
-import urlparse
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 # regex
 email_re = re.compile(r'([\w\.,]+@[\w\.,]+\.\w+)')
@@ -20,13 +23,13 @@ def crawl(url):
     # Find links
     links = link_re.findall(req.text)
 
-    print "\nFound {} links".format(len(links))
+    print("\nFound {} links".format(len(links)))
 
     # Search links for emails
     for link in links:
 
         # Get an absolute URL for a link
-        link = urlparse.urljoin(url, link)
+        link = urljoin(url, link)
 
         # Find all emails on current page
         result.update(email_re.findall(req.text))
@@ -36,7 +39,7 @@ def crawl(url):
 if __name__ == '__main__':
     emails = crawl('http://www.realpython.com')
 
-    print "\nScrapped e-mail addresses:"
+    print("\nScrapped e-mail addresses:")
     for email in emails:
-        print email
-    print "\n"
+        print(email)
+    print("\n")

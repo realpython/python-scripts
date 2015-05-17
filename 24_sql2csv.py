@@ -3,7 +3,7 @@ import csv
 import sqlite3
 
 if len(sys.argv) < 3:
-    print "Use: {0} DATABASE_NAME TABLE_NAME".format(sys.argv[0])
+    print("Use: {0} DATABASE_NAME TABLE_NAME".format(sys.argv[0]))
     exit()
 
 conn = sqlite3.connect(sys.argv[1])

@@ -9,7 +9,7 @@ def get_addresses(filename):
     row info from the csv file.
     """
     all_addresses = []
-    with open(filename, 'rb') as f:
+    with open(filename, 'rt') as f:
         reader = csv.reader(f)
         for row in reader:
             all_addresses.append(row)
@@ -29,7 +29,7 @@ def get_geolocation(all_the_ip_address):
     header_row.extend(['Country', 'City'])
     # get geolocation
     for line in all_the_ip_address:
-        print "Grabbing geo info for row # {0}".format(counter)
+        print("Grabbing geo info for row # {0}".format(counter))
         r = requests.get('https://freegeoip.net/json/{0}'.format(line[0]))
         line.extend([str(r.json()['country_name']), str(r.json()['city'])])
         updated_addresses.append(line)
@@ -43,10 +43,15 @@ def create_csv(updated_address_list):
     Given the updated lists of lists from `get_geolocation()`, this function
     creates a new CSV.
     """
-    with open('output.csv', 'wb') as f:
+    import sys
+    if sys.version_info >= (3, 0, 0):
+        f = open('output.csv', 'w', newline='')
+    else:
+        f = open('output.csv', 'wb')
+    with f:
         writer = csv.writer(f)
         writer.writerows(updated_address_list)
-    print "All done!"
+    print("All done!")
 
 
 if __name__ == '__main__':

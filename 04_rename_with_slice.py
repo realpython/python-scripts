@@ -8,7 +8,7 @@ for file in glob.glob("*.json"):
     new_file_name = file_name[:-6] + extension
     try:
         os.rename(file, new_file_name)
-    except OSError, e:
-        print e
+    except OSError as e:
+        print(e)
     else:
-        print "Renamed {} to {}".format(file, new_file_name)
+        print("Renamed {} to {}".format(file, new_file_name))

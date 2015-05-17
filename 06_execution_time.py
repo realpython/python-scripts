@@ -13,6 +13,7 @@ For example:
 
 
 import time
+import random
 
 
 class ExecutionTime:
@@ -25,9 +26,9 @@ class ExecutionTime:
 
 # ---- run code ---- #
 
-import random
 
 timer = ExecutionTime()
 sample_list = list()
-my_list = [random.randint(1, 888898) for num in xrange(1, 1000000) if num % 2 == 0]
-print 'Finished in {} seconds.'.format(timer.duration())
+my_list = [random.randint(1, 888898) for num in
+           range(1, 1000000) if num % 2 == 0]
+print('Finished in {} seconds.'.format(timer.duration()))

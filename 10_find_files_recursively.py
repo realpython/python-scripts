@@ -2,7 +2,7 @@ import fnmatch
 import os
 
 # constants
-PATH = '/../../../..'
+PATH = './'
 PATTERN = '*.py'
 
 
@@ -14,17 +14,17 @@ def get_file_names(filepath, pattern):
                 # matches.append(os.path.join(root, filename))  # full path
                 matches.append(os.path.join(filename))  # just file name
         if matches:
-            print "Found {} files:".format(len(matches))
+            print("Found {} files:".format(len(matches)))
             output_files(matches)
         else:
-            print "No files found."
+            print("No files found.")
     else:
-        print "Sorry that path does not exist. Try again."
+        print("Sorry that path does not exist. Try again.")
 
 
 def output_files(list_of_files):
     for filename in list_of_files:
-        print filename
+        print(filename)
 
 
 if __name__ == '__main__':

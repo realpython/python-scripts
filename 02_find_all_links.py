@@ -1,18 +1,18 @@
-import urllib2
+import requests
 import re
 
 # get url
-url =raw_input('Enter a URL (include `http://`): ')
+url = input('Enter a URL (include `http://`): ')
 
 # connect to the url
-website = urllib2.urlopen(url)
+website = requests.get(url)
 
 # read html
-html = website.read()
+html = website.text
 
 # use re.findall to grab all the links
 links = re.findall('"((http|ftp)s?://.*?)"', html)
 
 # output links
 for link in links:
-	print link[0]
+    print(link[0])

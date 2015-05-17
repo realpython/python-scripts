@@ -1,6 +1,9 @@
 import requests
 import re
-import urlparse
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 # regex
 link_re = re.compile(r'href="(.*?)"')
@@ -17,17 +20,15 @@ def crawl(url):
     # Find links
     links = link_re.findall(req.text)
 
-    print "\nFound {} links".format(len(links))
+    print("\nFound {} links".format(len(links)))
 
     # Search links for emails
     for link in links:
 
         # Get an absolute URL for a link
-        link = urlparse.urljoin(url, link)
+        link = urljoin(url, link)
 
-        print link
-        
+        print(link)
 
 if __name__ == '__main__':
     crawl('http://www.realpython.com')
-

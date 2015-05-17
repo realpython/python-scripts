@@ -3,7 +3,7 @@ from datetime import datetime
 from zipfile import ZipFile
 
 
-#set file name and time of creation
+# set file name and time of creation
 today = datetime.now()
 file_name = 'zipper_' + today.strftime('%Y.%m.%dh%H%M') + '.zip'
 dir_name = 'tmp/'  # update path

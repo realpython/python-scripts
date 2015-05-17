@@ -10,5 +10,5 @@ if len(sys.argv) == 3:
     subprocess.call(command, shell=True)
     subprocess.call('git push --tags', shell=True)
 else:
-    print 'usage: tag.py TAG_NAME COMMIT'
+    print('usage: tag.py TAG_NAME COMMIT')
     sys.exit(1)

@@ -117,10 +117,10 @@ def parse_file(arguments):
                 writer = writer.writerows(chunk)
 
             # Output info
-            print ""
-            print "Chunk # {}:".format(current_chunk)
-            print "Filepath: {}".format(current_output)
-            print "# of rows: {}".format(len(chunk))
+            print("")
+            print("Chunk # {}:".format(current_chunk))
+            print("Filepath: {}".format(current_output))
+            print("# of rows: {}".format(len(chunk)))
 
             # Create new chunk
             current_chunk += 1

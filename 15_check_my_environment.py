@@ -11,7 +11,7 @@ class Main:
         pass
 
     def process(self):
-        print "ok"
+        print("ok")
 
 if __name__ == "__main__":
     m = Main(some_script.CONFIGFILE)
@@ -39,7 +39,7 @@ CONFIGFILE = get_config_file()
 if CONFIGFILE is None:
     sys.exit("Configuration error! Unknown environment set. \
               Edit config.py and set appropriate environment")
-print "Config file: {}".format(CONFIGFILE)
+print("Config file: {}".format(CONFIGFILE))
 if not os.path.exists(CONFIGFILE):
     sys.exit("Configuration error! Config file does not exist")
-print "Config ok ...."
+print("Config ok ....")

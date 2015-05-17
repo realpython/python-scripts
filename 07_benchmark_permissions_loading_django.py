@@ -14,8 +14,8 @@ def timeit(method):
         te = time.time()
         all_times.append(te - ts)
 
-        print all_times
-        print numpy.mean(all_times)
+        print(all_times)
+        print(numpy.mean(all_times))
         return result
 
     return timed
