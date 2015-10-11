@@ -4,7 +4,7 @@
 1. **02_find_all_links.py**: get all links from a webpage
 1. **03_simple_twitter_manager.py**: accessing the Twitter API, example functions
 1. **04_rename_with_slice.py**: rename group of files, within a single directory, using slice
-1. **05_load_json_without_dupes.py**: load json, convert to dict, raise error if there is a duplicate key
+1. **05_load_json_without_dupes.py**: load JSON, convert to dict, raise error if there is a duplicate key
 1. **06_execution_time.py**: class used for timing execution of code
 1. **07_benchmark_permissions_loading_django.py**: benchmark loading of permissions in Django
 1. **08_basic_email_web_crawler.py**: web crawler for grabbing emails from a website
@@ -27,4 +27,5 @@
 1. **25_ip2geolocation.py**: Given a CSV file with an ip address (see sample - *25_sample_csv.csv*), return the geolocation based on the ip.
 1. **26_stock_scraper.py**: Scrape the S&P 500 Companies list from Wikipedia, then output the data.
 1. **27_send_sms.py**: Send SMS message via [TextBelt](http://textbelt.com/)
-1. **28_income_tax_calculator.py**: Income tax calcuator via [Taxee](http://taxee.io/)
+1. **28_income_tax_calculator.py**: Income tax calculator via [Taxee](http://taxee.io/)
+1. **29_json_to_yaml.py**: Convert JSON to YAML
