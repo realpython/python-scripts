@@ -30,3 +30,4 @@
 1. **28_income_tax_calculator.py**: Income tax calculator via [Taxee](http://taxee.io/)
 1. **29_json_to_yaml.py**: Convert JSON to YAML
 1. **30_fullcontact.py**: Call the [FullcContact](https://www.fullcontact.com/developer/) API
+1. **31_youtube_sentiment.py**: Calculate sentiment score from the comments of a Youtube video
