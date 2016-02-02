@@ -31,3 +31,4 @@
 1. **29_json_to_yaml.py**: Convert JSON to YAML
 1. **30_fullcontact.py**: Call the [FullcContact](https://www.fullcontact.com/developer/) API
 1. **31_youtube_sentiment.py**: Calculate sentiment score from the comments of a Youtube video
+1. **32_stock_scraper.py**: Get stock prices
