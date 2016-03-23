@@ -1,3 +1,4 @@
+import os
 import sys
 import requests
 
@@ -15,7 +16,7 @@ $ python 30_fullcontact.py twitter TWITTER_HANDLE
 
 # constants
 
-API_KEY = 'GET YOUR OWN'
+API_KEY = os.environ.get('FULLCONTACT_API_KEY')
 BASE_URL = 'http://api.fullcontact.com/v2/person.json'
 
 
