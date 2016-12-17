@@ -32,3 +32,4 @@
 1. **30_fullcontact.py**: Call the [FullcContact](https://www.fullcontact.com/developer/) API
 1. **31_youtube_sentiment.py**: Calculate sentiment score from the comments of a Youtube video
 1. **32_stock_scraper.py**: Get stock prices
+1. **34_git_all_repos.py**: Clone all repositories from a public user or organization on Github. Usage: `python git_all_repos.py users USER_NAME` or `python git_all_repos.py orgs ORG_NAME`
