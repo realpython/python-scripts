@@ -3,7 +3,7 @@ import os
 
 # constants
 PATH = './'
-PATTERN = '*.py'
+PATTERN = '*.md'
 
 
 def get_file_names(filepath, pattern):
@@ -28,4 +28,4 @@ def output_files(list_of_files):
 
 
 if __name__ == '__main__':
-    all_files = get_file_names(PATH, PATTERN)
+    get_file_names(PATH, PATTERN)
