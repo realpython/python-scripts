@@ -2,3 +2,4 @@ beautifulsoup4==4.4.1
 PyYAML==3.11
 requests==2.12.4
 wheel==0.24.0
+lxml==3.8.0
