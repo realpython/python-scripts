@@ -1,4 +1,4 @@
-from random import randint
+from random import choice
 
 
 def random_name_generator(first, second, x):
@@ -10,13 +10,8 @@ def random_name_generator(first, second, x):
          - number of random names
     """
     names = []
-    for i in range(0, int(x)):
-        random_first = randint(0, len(first)-1)
-        random_last = randint(0, len(second)-1)
-        names.append("{0} {1}".format(
-            first[random_first],
-            second[random_last])
-        )
+    for i in range(x):
+        names.append("{0} {1}".format(choice(first), choice(second)))
     return set(names)
 
 
