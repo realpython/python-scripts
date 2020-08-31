@@ -28,7 +28,7 @@ def validate_password(result):
             Lower += 1
         elif i in specialChars:
             special_characters += 1
-        elif i in all:
+        elif i.isdigit() == True:
             digits += 1
     if Upper and Lower and special_characters and digits >=1:
         print(Green + "{}    passowrd is good ".format(result) +End)        
