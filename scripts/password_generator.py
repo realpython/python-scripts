@@ -1,5 +1,6 @@
 import random
 import string
+import sys
 Green = "\033[32m"
 Blue = "\034[40m"
 End = "\033[0m"
@@ -37,6 +38,11 @@ def validate_password(result):
 
 if __name__ == "__main__":
         number = int(raw_input("enter the number : "))
+        if number < 4:
+            print("provide the number greater or equal to 4")
+            sys.exit(0)
+
+
         result = passowrd_generator(number)
         validate_password(result)
     
