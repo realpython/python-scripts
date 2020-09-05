@@ -10,25 +10,36 @@ link_re = re.compile(r'href="(.*?)"')
 
 
 def crawl(url):
+    """
+        Crawls a page
+        Arguments:
+         - URL of the page to crawl
+         Return:
+         - List of all unique links found
+    """
 
+    found_link = []
     req = requests.get(url)
 
     # Check if successful
     if(req.status_code != 200):
         return []
 
-    # Find links
-    links = link_re.findall(req.text)
+    # Finding unique links
+    links = set(link_re.findall(req.text))
 
-    print("\nFound {} links".format(len(links)))
+    print("\nFound {} unique links".format(len(links)))
 
     # Search links for emails
     for link in links:
 
         # Get an absolute URL for a link
         link = urljoin(url, link)
-
+        found_link.append(link)
         print(link)
+    
+    return found_link
 
 if __name__ == '__main__':
-    crawl('http://www.realpython.com')
+    url = input("Enter a url to crawl: ")
+    crawl(url)
