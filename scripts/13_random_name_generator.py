@@ -15,7 +15,11 @@ def random_name_generator(first, second, x):
     return set(names)
 
 
-first_names = ["Drew", "Mike", "Landon", "Jeremy", "Tyler", "Tom", "Avery"]
-last_names = ["Smith", "Jones", "Brighton", "Taylor"]
-names = random_name_generator(first_names, last_names, 5)
+first_names = ["Drew", "Mike", "Landon", "Jeremy", "Tyler", "Tom", "Avery", "James", "Hunter", "Ethan", "Bryan", "Jeff", "Ryan", "Luke", "Brad", "Jennifer", "Lola", "Isadora"]
+last_names = ["Smith", "Jones", "Brighton", "Taylor", "Green", "Brown", "Scott", "Eggart", "Hunt", "Rhule"]
+
+
+num = int(input("Number of names to generate: "))
+
+names = random_name_generator(first_names, last_names, num)
 print('\n'.join(names))
