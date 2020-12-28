@@ -33,7 +33,7 @@ Splits a CSV file into multiple files based on command line arguments.
 def get_arguments():
     """Grab user supplied arguments using the argparse library."""
 
-    # Use arparse to get command line arguments
+    # Use argparse to get command line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input_file", required=True,
                         help="csv input file (with extension)", type=str)
