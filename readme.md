@@ -34,3 +34,4 @@
 1. **32_stock_scraper.py**: Get stock prices
 1. **33_country_code.py**: Convert country code to country name
 1. **34_git_all_repos.py**: Clone all repositories from a public user or organization on Github. Usage: `python git_all_repos.py users USER_NAME` or `python git_all_repos.py orgs ORG_NAME`
+1. **35_pass_generator.py**: Generates password like a string and printing it to the terminal
