@@ -1,14 +1,23 @@
 import os
 import glob
+import sys
 
-os.chdir("/Users/mikeherman/repos/bugs/se-platform/se/core/permissions")
-for file in glob.glob("*.json"):
-    file_name = os.path.splitext(file)[0]
-    extension = os.path.splitext(file)[1]
-    new_file_name = file_name[:-6] + extension
+if len(sys.argv) != 4:
+    print("Incorrect usage, plz provide arguments like in an example: python script_name.py <folder_path> <file_type> <slicing>")
+    sys.exit(1)
+
+folder_path = os.path.join(sys.argv[1])
+file_type = sys.argv[2]
+slicing = int(sys.argv[3])
+
+os.chdir(folder_path)
+
+for file in glob.glob(f"*.{file_type}"):
+    file_name, extension = os.path.splitext(file)
+    new_file_name = f"{file_name[:-slicing]}{extension}"
     try:
         os.rename(file, new_file_name)
-    except OSError as e:
-        print(e)
+    except OSError as err:
+        print(err)
     else:
-        print("Renamed {} to {}".format(file, new_file_name))
+        print(f"Renamed {file} to {new_file_name}")
