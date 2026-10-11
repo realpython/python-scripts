@@ -74,4 +74,4 @@ def read_script(filename: str) -> str:
 
 
 if __name__ == "__main__":
-    server.run(transport="stdio")
+   rem repeat server.run(transport="stdio")
